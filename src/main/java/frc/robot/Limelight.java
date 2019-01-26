@@ -10,64 +10,79 @@ public class Limelight {
 
 	
 	Movement move;
-	PID pid;
+	PID rotationPID;
+	PID leftRightPID;
+	PID distancePID;
+	NetworkTable table;
+	NetworkTableEntry tv;
+	NetworkTableEntry ts;
+	NetworkTableEntry tx;
+	NetworkTableEntry ta;
+	NetworkTableEntry ledMode;
 	
 	
-	public Limelight(Movement newMovement, PID newPID)
+	
+	public Limelight(Movement newMovement)
 	{
 		move = newMovement;
-		pid = newPID;
+		rotationPID = new PID(
+			SmartDashboard.getNumber("rotation_P", 0),
+			SmartDashboard.getNumber("rotation_I", 0),
+			SmartDashboard.getNumber("rotation_D", 0),
+			SmartDashboard.getNumber("rotation_SetPoint", 0)
+			);
+
+			
+		leftRightPID = new PID(
+			SmartDashboard.getNumber("leftRight_P", 0),
+			SmartDashboard.getNumber("leftRight_I", 0),
+			SmartDashboard.getNumber("leftRight_D", 0),
+			SmartDashboard.getNumber("leftRight_SetPoint", 0)
+			);
+		distancePID = new PID(
+			SmartDashboard.getNumber("distance_P", 0),
+			SmartDashboard.getNumber("distance_I", 0),
+			SmartDashboard.getNumber("distance_D", 0),
+			SmartDashboard.getNumber("distance_SetPoint", 0)
+			);
+		
+		table = NetworkTableInstance.getDefault().getTable("limelight-");
+		tx = table.getEntry("tx");
+		tv = table.getEntry("tv");
+		ta = table.getEntry("ta");
+		ledMode = table.getEntry("ledMode");
 	}
-	
-	NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-	NetworkTableEntry tx = table.getEntry("tx");
-	NetworkTableEntry ty = table.getEntry("ty");
-	NetworkTableEntry tv = table.getEntry("tv");
-	NetworkTableEntry ta = table.getEntry("ta");
-	
-	
 
-	
+	//This is the method used to chase a target.
+	public void chase()
+	{
+		if (tv.getDouble(0) == 1){
+			//added this method to movement so that we can use it autonomously more easily
+			move.autonomousUpdate(
+					distancePID.update(ta.getDouble(distancePID.getSetpoint())),
+					leftRightPID.update(tx.getDouble(leftRightPID.getSetpoint())),
+					rotationPID.update(ts.getDouble(rotationPID.getSetpoint()))
+			);
+		}
+		else {
+			move.autonomousUpdate(0, 0, 0.31); //Just spin slowly until we find a target
+		}
 
-	
+	}
+
+	public void blink()
+	{
+		ledMode.setDouble(2);
+	}
+
+
 	public void display()
 	{
-		
+		SmartDashboard.putNumber("Target", tv.getDouble(4));
+		SmartDashboard.putNumber("Horizontal", tx.getDouble(0));
+		// SmartDashboard.putNumber("Rotational", ts.getDouble(0));
+		SmartDashboard.putNumber("Distance", ta.getDouble(0));
+
 	}
-	
 
-	double left;
-	double right;
-	
-	public void seek()
-	{
-		double v = tv.getDouble(0.0);
-		double x = tx.getDouble(0.0);
-		
-		double kP = 0.0;
-		double kI = 0.0;
-		double kD = 0.0;
-		double setpoint = 0.0;
-		
-		
-		
-		
-
-		double steering_adjust = 0.0f;
-		if (v == 0.0f)
-		{
-		        // We don't see the target, seek for the target by spinning in place at a safe speed.
-		        steering_adjust = 0.3f;
-		}
-		else
-		{
-		        steering_adjust = pid.update(setpoint);
-		}
-
-		left += steering_adjust;
-		right -= steering_adjust;
-	}
-		
-	
-	
-}
+}	

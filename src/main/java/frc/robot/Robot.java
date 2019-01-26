@@ -18,9 +18,12 @@ public class Robot extends IterativeRobot {
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	
 	Controller controller1;
+	Controller controller2;
 	Rotaion rotaion;
 	Movement move;
 	ArmMovement arm;
+	Winch winch;
+	Elevator e;
 
 	/* This is the method that runs right as the code runs on the robot.
 	 * This is where we construct our objects
@@ -32,8 +35,11 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto choices", m_chooser);
 		
 		controller1 = new Controller(); // object for the driver controller
+		controller2 = new Controller();
 		rotaion = new Rotaion(); // object for rotaion class
 		move = new Movement(controller1, rotaion); // movement object for drive code
+		winch = new Winch(controller2); //WINCH time 
+		e = new Elevator(controller2);
 		
 		
 	}
@@ -81,11 +87,15 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		
 		controller1.update();
+		controller2.update();
 		move.update();
+		winch.update();
 		move.display();
-		// arm.update();
-		
-		
+		e.update();	
+
+		// arm.update();	
 	}
+
+		
 
 }
