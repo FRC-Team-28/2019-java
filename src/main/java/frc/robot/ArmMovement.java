@@ -8,8 +8,9 @@ public class ArmMovement {
 
 	private AnalogPotentiometer analogPot = new AnalogPotentiometer(PinConstants.ARM_POT);
 	private Controller controller2;
-	private PID pid=new PID(0,0,0,0);
+	private PID pid = new PID(0,0,0,0);
 	private Spark motor = new Spark(PinConstants.ARM);
+	
 	//TODO tune PID and set starting position
 	
 	public ArmMovement(Controller c){

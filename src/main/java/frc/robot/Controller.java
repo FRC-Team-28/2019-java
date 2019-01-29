@@ -29,6 +29,7 @@ public class Controller {
 	 */
 	public void update()
 	{
+
 		axisMap.put("forward", Controller1.getY(GenericHID.Hand.kLeft)); 
 		axisMap.put("right", Controller1.getX(GenericHID.Hand.kLeft));
 		axisMap.put("turnRight", Controller1.getTriggerAxis(GenericHID.Hand.kRight) - (Controller1.getTriggerAxis(GenericHID.Hand.kLeft)));
@@ -36,6 +37,11 @@ public class Controller {
 		buttonMap.put("UnZucc", Controller2.getBButton());
 		axisMap.put("winch", Controller2.getY(GenericHID.Hand.kLeft)); 
 		axisMap.put("elevator", Controller2.getY(GenericHID.Hand.kRight)); 
+		buttonMap.put("chase", Controller1.getAButton());
+		buttonMap.put("light", Controller2.getYButton());
+		buttonMap.put("blink", Controller2.getXButton());
+
+		
 
 
 
@@ -54,6 +60,12 @@ public class Controller {
 	{
 		return buttonMap.get(name);
 	}
+
+
+
+
 	
 }
+
+
  

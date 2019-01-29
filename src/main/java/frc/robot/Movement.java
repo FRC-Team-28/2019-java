@@ -165,7 +165,8 @@ public class Movement {
  		this.setBackRight(this.getBackRight());
  		this.setBackLeft(this.getBackLeft());	
     	    	
- 	}
+	 }
+	 
  	
  	// run to display encoder values, input values and gyro values
  	public void display()

@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * 
  */
 
-//this is a test
 
 public class Robot extends IterativeRobot {
 	private static final String kDefaultAuto = "Default";
@@ -24,7 +23,9 @@ public class Robot extends IterativeRobot {
 	ArmMovement arm;
 	Winch winch;
 	Elevator e;
-
+	Limelight lime; 
+	Vision vis;
+	
 	/* This is the method that runs right as the code runs on the robot.
 	 * This is where we construct our objects
 	 */
@@ -40,6 +41,8 @@ public class Robot extends IterativeRobot {
 		move = new Movement(controller1, rotaion); // movement object for drive code
 		winch = new Winch(controller2); //WINCH time 
 		e = new Elevator(controller2);
+		vis = new Vision();
+		lime = new Limelight(move, controller2, vis);
 		
 		
 	}
@@ -75,7 +78,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		
-		System.out.println("YEETED");
 
 		rotaion.gyroReset();
 		move.resetEncoder();
@@ -92,10 +94,16 @@ public class Robot extends IterativeRobot {
 		winch.update();
 		move.display();
 		e.update();	
+		lime.update();
+		if(controller1.getButton("blink") == true)
+		{
+			lime.blink();
+		}
+		lime.SwitchLimelight();
+		vis.update();
 
 		// arm.update();	
 	}
-
-		
-
 }
+
+
