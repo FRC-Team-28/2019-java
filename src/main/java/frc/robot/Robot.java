@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 
 
-public class Robot extends IterativeRobot {
+public class Robot extends IterativeRobot 
+{
 	private static final String kDefaultAuto = "Default";
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
@@ -30,7 +31,8 @@ public class Robot extends IterativeRobot {
 	 * This is where we construct our objects
 	 */
 	@Override
-	public void robotInit() {
+	public void robotInit() 
+	{
 		m_chooser.addDefault("Default Auto", kDefaultAuto); 
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
@@ -50,7 +52,8 @@ public class Robot extends IterativeRobot {
 	/* This runs once as soon as auto starts 
 	 */
 	@Override
-	public void autonomousInit() {
+	public void autonomousInit() 
+	{
 		m_autoSelected = m_chooser.getSelected();
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
@@ -61,8 +64,10 @@ public class Robot extends IterativeRobot {
 	/* This runs in a loop while in auto
 	 */
 	@Override
-	public void autonomousPeriodic() {
-		switch (m_autoSelected) {
+	public void autonomousPeriodic() 
+	{
+		switch (m_autoSelected) 
+		{
 			case kCustomAuto:
 				// Put custom auto code here
 				break;
@@ -76,9 +81,8 @@ public class Robot extends IterativeRobot {
 	/* Runs as soon as teleop starts
 	 */
 	@Override
-	public void teleopInit() {
-		
-
+	public void teleopInit() 
+	{
 		rotaion.gyroReset();
 		move.resetEncoder();
 	}
@@ -86,7 +90,8 @@ public class Robot extends IterativeRobot {
 	/* Runs in a loop during teleop
 	 */
 	@Override
-	public void teleopPeriodic() {
+	public void teleopPeriodic() 
+	{
 		
 		controller1.update();
 		controller2.update();
@@ -95,9 +100,9 @@ public class Robot extends IterativeRobot {
 		move.display();
 		e.update();	
 		lime.update();
-		if(controller1.getButton("blink") == true)
+		if(controller1.getButton("chase") == true)
 		{
-			lime.blink();
+			lime.test();
 		}
 		lime.SwitchLimelight();
 		vis.update();

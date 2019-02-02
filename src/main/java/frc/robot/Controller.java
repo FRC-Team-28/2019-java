@@ -51,15 +51,19 @@ public class Controller {
 	 * 
 	 */
 	
+	//Returns Axis value of Controller
 	public double getAxis(String name)
 	{
 		return axisMap.get(name);
 	}
 	
+	//Returns the state of a button
 	public boolean getButton(String name)
 	{
 		return buttonMap.get(name);
 	}
+
+	
 
 
 

@@ -80,6 +80,19 @@ public class Limelight {
 		}
 
 	}
+
+	public void test()
+	{
+		if(tv.getDouble(0) == 1)
+		{
+			move.autonomousUpdate(((1 - (ta.getDouble(0))) * 0.5), 0, 0); 
+			System.out.println(ta.getDouble(0));
+		}
+		else
+		{
+			move.autonomousUpdate(0, 0, 0); 
+		}
+	}
 	
 	public void blink()
 	{
@@ -88,15 +101,22 @@ public class Limelight {
 
 	public void update()
 	{
-		if(tv.getDouble(4) == 1)
-			System.out.println("TARGET DETECTED!!");
-		else if( tv.getDouble(4) == 4)
-			System.out.println("NO NETWORK TABLE");
-		else if (tv.getDouble(4) == 0)
-		{
-			System.out.println("TARGET NOT FOUND");
+		// if(tv.getDouble(4) == 1)
+		// 	System.out.println("TARGET DETECTED!!");
+		// else if( tv.getDouble(4) == 4)
+		// 	System.out.println("NO NETWORK TABLE");
+		// else if (tv.getDouble(4) == 0)
+		// {
+		// 	System.out.println("TARGET NOT FOUND");
 
+		// }
+
+		if(controller2.getButton("blink") == true)
+		{
+			this.blink();
 		}
+
+
 		
 
 	}

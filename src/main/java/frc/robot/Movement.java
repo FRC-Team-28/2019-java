@@ -19,6 +19,8 @@ public class Movement {
 	
 	Controller controller;
 	Rotaion rotaion;
+	private double thresh = 0.3;
+	private boolean colby = true;
 
 	public Movement (Controller newController, Rotaion newRotaion){
 		controller = newController; //controller 1 used for driving
@@ -32,10 +34,15 @@ public class Movement {
 	 * set methods set the talon motor controllers to some double
 	 */
 	public double getFrontLeft(){
-		if(-1 * (forwardInput - lateralInput - rotaion.update(rotaionInput)) > 0.3 || -1 * (forwardInput - lateralInput - rotaion.update(rotaionInput)) < -0.3)
-			return -1 * (forwardInput - lateralInput - rotaion.update(rotaionInput)); 
+		if(colby)
+		{
+			if(-1 * (forwardInput - lateralInput - rotaion.update(rotaionInput)) > thresh || -1 * (forwardInput - lateralInput - rotaion.update(rotaionInput)) < -thresh)
+				return -1 * (forwardInput - lateralInput - rotaion.update(rotaionInput)); 
+			else
+				return 0; 
+		}
 		else
-			return 0; 
+			return -1 * (forwardInput - lateralInput - rotaion.update(rotaionInput)); 
 
 	}
 	
@@ -44,10 +51,18 @@ public class Movement {
 	}
 	
 	public double getFrontRight(){
-		if((forwardInput + lateralInput + rotaion.update(rotaionInput)) > 0.3 || (forwardInput + lateralInput + rotaion.update(rotaionInput)) < -0.3)
-			return (forwardInput + lateralInput + rotaion.update(rotaionInput)); 
+		
+		if(colby)
+		{
+			if((forwardInput + lateralInput + rotaion.update(rotaionInput)) > thresh || (forwardInput + lateralInput + rotaion.update(rotaionInput)) < -thresh)
+				return (forwardInput + lateralInput + rotaion.update(rotaionInput)); 
+			else
+				return 0; 
+		}
 		else
-			return 0; 
+			return (forwardInput + lateralInput + rotaion.update(rotaionInput)); 
+
+
 	}
 	
 	public void setFrontRight(double speed){
@@ -55,10 +70,18 @@ public class Movement {
 	}
 	
 	public double getBackLeft(){
-		if((-1 * (forwardInput + lateralInput - rotaion.update(rotaionInput)) > 0.3 || -1 * (forwardInput + lateralInput - rotaion.update(rotaionInput)) < -0.3))
-			return -1 * (forwardInput + lateralInput - rotaion.update(rotaionInput));
+		if(colby)
+		{
+			if((-1 * (forwardInput + lateralInput - rotaion.update(rotaionInput)) > thresh || -1 * (forwardInput + lateralInput - rotaion.update(rotaionInput)) < -thresh))
+				return -1 * (forwardInput + lateralInput - rotaion.update(rotaionInput));
+			else
+				return 0;
+		}
 		else
-			return 0;
+		{
+			return -1 * (forwardInput + lateralInput - rotaion.update(rotaionInput));
+		}
+		
 	}
 	
 	public void setBackLeft(double speed){
@@ -66,10 +89,17 @@ public class Movement {
 	}
 	
 	public double getBackRight(){
-		if((forwardInput - lateralInput + rotaion.update(rotaionInput)) > 0.3 || (forwardInput - lateralInput + rotaion.update(rotaionInput)) < -0.3)
-			return (forwardInput - lateralInput + rotaion.update(rotaionInput));
+		if(colby)
+		{	
+			if((forwardInput - lateralInput + rotaion.update(rotaionInput)) > thresh || (forwardInput - lateralInput + rotaion.update(rotaionInput)) < -thresh)
+				return (forwardInput - lateralInput + rotaion.update(rotaionInput));
+			else
+				return 0;
+		}
 		else
-			return 0;
+			return (forwardInput - lateralInput + rotaion.update(rotaionInput));
+
+
 	}
 	
 	public void setBackRight(double speed){
