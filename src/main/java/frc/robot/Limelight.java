@@ -1,6 +1,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import javax.lang.model.util.ElementScanner6;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -21,7 +24,7 @@ public class Limelight {
 	NetworkTableEntry ledMode;
 	boolean limelightSwitch = false;
 	Vision light; 
-	boolean toggle;
+	boolean toggle = false;
 	
 	
 	
@@ -94,6 +97,25 @@ public class Limelight {
 		}
 	}
 	
+	public void test2()
+	{
+		if(tx.getDouble(0) < -3)
+		{
+			move.autonomousUpdate(0, 0, -0.5); 
+		}
+		else if(tx.getDouble(0) > 3)
+		{
+			move.autonomousUpdate(0, 0, 0.5); 
+		}
+		else
+		{
+			if(ta.getDouble(0) < 0.7)
+				move.autonomousUpdate(-0.5, 0, 0); 
+			
+		}
+
+
+	}
 	public void blink()
 	{
 		ledMode.setDouble(2);
@@ -132,19 +154,24 @@ public class Limelight {
 
 	public void SwitchLimelight()
 	{
-		if(toggle)
-		{
-			light.setLEDMode(3);						
-		}
-		else
-		{
-			light.setLEDMode(1);					
-		}
+		
 		if (controller2.getButton("light"))
 		{
 			toggle = !toggle;
 		}
+		if(toggle)
+		{
+			if(light.getLEDMode() == 1 && toggle)
+			{
+				light.setLEDMode(3);						
+			}
+			else
+			{
+				light.setLEDMode(1);					
+			}
+
+		}
+		System.out.println(toggle);
 	}	
 	
-		
 }

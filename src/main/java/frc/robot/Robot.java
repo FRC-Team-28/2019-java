@@ -106,7 +106,7 @@ public class Robot extends IterativeRobot
 		}
 		lime.SwitchLimelight();
 		vis.update();
-
+		lime.test2();
 		// arm.update();	
 	}
 }

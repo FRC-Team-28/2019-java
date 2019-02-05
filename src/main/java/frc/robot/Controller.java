@@ -40,6 +40,7 @@ public class Controller {
 		buttonMap.put("chase", Controller1.getAButton());
 		buttonMap.put("light", Controller2.getYButton());
 		buttonMap.put("blink", Controller2.getXButton());
+		buttonMap.put("stopLime", Controller2.getAButton());
 
 		
 
