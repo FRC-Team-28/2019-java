@@ -104,7 +104,8 @@ public class Robot extends IterativeRobot
 		{
 			lime.test();
 		}
-		lime.SwitchLimelight();
+		//Uncomment when limelight is plugged in
+		//lime.SwitchLimelight();
 		vis.update();
 		lime.test2();
 		// arm.update();	

@@ -12,6 +12,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 public class Limelight {
 
 	Controller controller2;
+	Controller controller1;
 	Movement move;
 	PID rotationPID;
 	PID leftRightPID;
@@ -25,6 +26,7 @@ public class Limelight {
 	boolean limelightSwitch = false;
 	Vision light; 
 	boolean toggle = false;
+	boolean stupidLimelightTargetingStuff = false;
 	
 	
 	
@@ -99,19 +101,21 @@ public class Limelight {
 	
 	public void test2()
 	{
-		if(tx.getDouble(0) < -3)
+		if(stupidLimelightTargetingStuff)
 		{
-			move.autonomousUpdate(0, 0, -0.5); 
-		}
-		else if(tx.getDouble(0) > 3)
-		{
-			move.autonomousUpdate(0, 0, 0.5); 
-		}
-		else
-		{
-			if(ta.getDouble(0) < 0.7)
-				move.autonomousUpdate(-0.5, 0, 0); 
-			
+			if(tx.getDouble(0) < -3)
+			{
+				move.autonomousUpdate(0, 0, -0.5); 
+			}
+			else if(tx.getDouble(0) > 3)
+			{
+				move.autonomousUpdate(0, 0, 0.5); 
+			}
+			else
+			{
+				if(ta.getDouble(0) < 0.7)
+					move.autonomousUpdate(-0.5, 0, 0); 
+			}
 		}
 
 
@@ -151,11 +155,13 @@ public class Limelight {
 		SmartDashboard.putNumber("ta", ta.getDouble(0));
 		
 	}
-
+	
+//Uncomment when limelight is in
+/*
 	public void SwitchLimelight()
 	{
-		
-		if (controller2.getButton("light"))
+
+		if (controller1.getButton("light"))
 		{
 			toggle = !toggle;
 		}
@@ -173,5 +179,6 @@ public class Limelight {
 		}
 		System.out.println(toggle);
 	}	
+	*/
 	
 }

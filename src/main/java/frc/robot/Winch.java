@@ -4,9 +4,12 @@ import edu.wpi.first.wpilibj.Spark;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import edu.wpi.first.wpilibj.Encoder;
 
 public class Winch
 {
+
+    Encoder enc = new Encoder(0, 1);
 
     Controller controller2;
         
@@ -23,13 +26,13 @@ public class Winch
         winchTalon.set(ControlMode.PercentOutput, x);
     }
 
-    //Gets 30% of Controllers value to set to Talon
+    //Gets Controllers value to set to Talon
     public double getWinch()
     {
         if(controller2.getAxis("winch") > 0.3)
-            return 0.3 * controller2.getAxis("winch");
+            return 0.6 * controller2.getAxis("winch");
         else if(controller2.getAxis("winch") < -0.3)
-            return -0.3 * controller2.getAxis("winch");
+            return 0.4 * controller2.getAxis("winch");
         else
             return 0;
             
@@ -40,6 +43,7 @@ public class Winch
     public void update()
     {
         this.setWinch(this.getWinch());
+        System.out.println();
     }
 
         
