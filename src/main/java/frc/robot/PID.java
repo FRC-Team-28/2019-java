@@ -25,12 +25,12 @@ public class PID {
 		this.kD = kD;
 		this.kF = kF;
 		this.setpoint = setpoint;
-		
+	
 		SmartDashboard.putNumber("kP", kP);
 		SmartDashboard.putNumber("kI", kI);
 		SmartDashboard.putNumber("kD", kD);
 		SmartDashboard.putNumber("kF", kF);
-		// epic gamers only
+		// epic gays only LOL XD
 	}
 	
 	public double getSetpoint() {

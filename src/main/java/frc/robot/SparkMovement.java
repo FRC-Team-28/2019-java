@@ -1,38 +1,38 @@
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Encoder;
 
+public class SparkMovement{
 /*
- * This is the drive code
- */
-public class Movement {
-	
-/*
-	//
-	private TalonSRX bL = new TalonSRX(PinConstants.BL_MOTOR);
-	private TalonSRX bR = new TalonSRX(PinConstants.BR_MOTOR);
-	private TalonSRX fL = new TalonSRX(PinConstants.FL_MOTOR);
-	private TalonSRX fR = new TalonSRX(PinConstants.FR_MOTOR);
-	private double forwardInput = 0;
+    private Spark bL = new Spark(PinConstants.BL_MOTOR);
+	private Spark bR = new Spark(PinConstants.BR_MOTOR);
+	private Spark fL = new Spark(PinConstants.FL_MOTOR);
+    private Spark fR = new Spark(PinConstants.FR_MOTOR);
+
+    private double forwardInput = 0;
 	private double lateralInput = 0;
-	private double rotaionInput = 0;
-	//
-	
-	Controller controller;
-	Rotaion rotaion;
+    private double rotaionInput = 0;    
+    
+    Controller controller;
+    boolean useThresh;
+    Rotaion rotaion;
+ 
+    private Encoder fL_Enc = new Encoder(PinConstants.FL_ENC_A, PinConstants.FR_ENC_B);
+    private Encoder fR_Enc = new Encoder(PinConstants.FR_ENC_A, PinConstants.FR_ENC_B);
+    private Encoder bL_Enc = new Encoder(PinConstants.BL_ENC_A, PinConstants.BL_ENC_B);
+    private Encoder bR_Enc = new Encoder(PinConstants.BR_ENC_A, PinConstants.BR_ENC_B);
+
 	private double thresh = 0.3;
-	private boolean colby = true;
-	//
-	public Movement (Controller newController, Rotaion newRotaion){
+
+    public SparkMovement (Controller newController, Rotaion newRotaion){
 		controller = newController; //controller 1 used for driving
 		rotaion = newRotaion; //object used for gyro stuff
-	}
-	
-	
-	public double getFrontLeft(){
-		if(colby)
+    }
+    
+    public double getFrontLeft(){
+		if(useThresh)
 		{
 			if(-1 * (forwardInput - lateralInput - rotaion.update(rotaionInput)) > thresh || -1 * (forwardInput - lateralInput - rotaion.update(rotaionInput)) < -thresh)
 				return -1 * (forwardInput - lateralInput - rotaion.update(rotaionInput)); 
@@ -42,15 +42,15 @@ public class Movement {
 		else
 			return -1 * (forwardInput - lateralInput - rotaion.update(rotaionInput)); 
 
-	}
-	//
+    }
+	
 	public void setFrontLeft(double speed){
-		fL.set(ControlMode.PercentOutput, speed);
+		fL.set(speed);
 	}
-	//
+	
 	public double getFrontRight(){
 		
-		if(colby)
+		if(useThresh)
 		{
 			if((forwardInput + lateralInput + rotaion.update(rotaionInput)) > thresh || (forwardInput + lateralInput + rotaion.update(rotaionInput)) < -thresh)
 				return (forwardInput + lateralInput + rotaion.update(rotaionInput)); 
@@ -62,13 +62,13 @@ public class Movement {
 
 
 	}
-	
-	public void setFrontRight(double speed){
-		fR.set(ControlMode.PercentOutput, speed);
+    
+    public void setFrontRight(double speed){
+		fR.set(speed);
 	}
 	
 	public double getBackLeft(){
-		if(colby)
+		if(useThresh)
 		{
 			if((-1 * (forwardInput + lateralInput - rotaion.update(rotaionInput)) > thresh || -1 * (forwardInput + lateralInput - rotaion.update(rotaionInput)) < -thresh))
 				return -1 * (forwardInput + lateralInput - rotaion.update(rotaionInput));
@@ -83,11 +83,11 @@ public class Movement {
 	}
 	
 	public void setBackLeft(double speed){
-		bL.set(ControlMode.PercentOutput, speed);
+		bL.set(speed);
 	}
 	
 	public double getBackRight(){
-		if(colby)
+		if(useThresh)
 		{	
 			if((forwardInput - lateralInput + rotaion.update(rotaionInput)) > thresh || (forwardInput - lateralInput + rotaion.update(rotaionInput)) < -thresh)
 				return (forwardInput - lateralInput + rotaion.update(rotaionInput));
@@ -101,7 +101,7 @@ public class Movement {
 	}
 	
 	public void setBackRight(double speed){
-		bR.set(ControlMode.PercentOutput, speed);
+		bR.set(speed);
 	}
 	
 	// sets all wheels to the same values
@@ -126,89 +126,87 @@ public class Movement {
 		setFrontLeft(x);
 		setBackLeft(x);
 	}
-	
-	// resets encoder distances
-	public void resetEncoder()
+    
+    public void encReset()
  	{
- 		bL.getSensorCollection().setQuadraturePosition(0, 0);
- 		bR.getSensorCollection().setQuadraturePosition(0, 0);
- 		fL.getSensorCollection().setQuadraturePosition(0, 0);
- 		fR.getSensorCollection().setQuadraturePosition(0, 0);	
- 	}
- 	
-	// these methods get encoder readings from each wheel so the distance traveled and the rate of each wheel is known
- 	public double getFLEncDist()
+        fL_Enc.reset();
+        fR_Enc.reset();
+        bL_Enc.reset();
+        bR_Enc.reset();
+    }
+     
+     public double getFLEncDist()
  	{
- 		return fL.getSensorCollection().getQuadraturePosition();
- 	}
- 	
- 	public double getFREncDist()
+ 		return fL_Enc.getDistance();
+     }
+     
+     public double getFREncDist()
  	{
- 		return fR.getSensorCollection().getQuadraturePosition();
- 	}
- 	
- 	public double getBLEncDist()
+ 		return fR_Enc.getDistance();
+     }
+     
+     public double getBLEncDist()
  	{
- 		return bL.getSensorCollection().getQuadraturePosition();
- 	}
- 	
- 	public double getBREncDist()
+ 		return bL_Enc.getDistance();
+     }
+     
+     public double getBREncDist()
  	{
- 		return bR.getSensorCollection().getQuadraturePosition();
- 	}
- 	
- 	public double getFLEncRate()
- 	{
- 		return fL.getSensorCollection().getQuadratureVelocity();
- 	}
- 	
- 	public double getFREncRate()
- 	{
- 		return fR.getSensorCollection().getQuadratureVelocity();
- 	}
- 	
- 	public double getBLEncRate()
- 	{
- 		return bL.getSensorCollection().getQuadratureVelocity();
- 	}
- 	
- 	public double getBREncRate()
- 	{
- 		return bR.getSensorCollection().getQuadratureVelocity();
- 	}
- 	
-	
-	// run during teleop
- 	public void update(){
- 		
- 		rotaion.reset();
-		 
-		//added 
-		forwardInput = controller.getAxis("forward");
-		lateralInput = controller.getAxis("right");
-		rotaionInput = controller.getAxis("turnRight");
+ 		return bR_Enc.getDistance();
+     }
+     
+    
+     public boolean getFLEncDirection()
+     {
+        return fL_Enc.getDirection();
+     }
 
- 		this.setFrontRight(this.getFrontRight());
- 		this.setFrontLeft(this.getFrontLeft());
- 		this.setBackRight(this.getBackRight());
- 		this.setBackLeft(this.getBackLeft());	
-    	    	
-	 }
-	 
- 	
- 	// run to display encoder values, input values and gyro values
- 	public void display()
-	{
-		
-		double FLEncoderDist = this.getFLEncDist();
+     public boolean getFREncDirection()
+     {
+        return fR_Enc.getDirection();
+     }
+
+     public boolean getBLEncDirection()
+     {
+        return bL_Enc.getDirection();
+     }
+
+     public boolean getBREncDirection()
+     {
+        return bR_Enc.getDirection();
+     }
+
+    public double getFLEncRate()
+    {
+        return fL_Enc.getRate();
+    }
+
+    public double getFREncRate()
+    {
+        return fR_Enc.getRate();
+    }
+
+    public double getBLEncRate()
+    {
+        return bL_Enc.getRate();
+    }
+
+    public double getBREncRate()
+    {
+        return bR_Enc.getRate();
+    }
+
+    public void display(){
+        
+        double FLEncoderDist = this.getFLEncDist();
     	double FREncoderDist = this.getFREncDist();
     	double BLEncoderDist = this.getBLEncDist();
     	double BREncoderDist = this.getBREncDist();
-    	
-    	SmartDashboard.putNumber("Front Left Encoder Distance", FLEncoderDist);
-    	SmartDashboard.putNumber("Front Right Encoder Distance", FREncoderDist);
-    	SmartDashboard.putNumber("Back Left Encoder Distance", BLEncoderDist);
-    	SmartDashboard.putNumber("Back Right Encoder Distance", BREncoderDist);
+
+    	SmartDashboard.putNumber("Front Left Encoder Dist", FLEncoderDist);
+    	SmartDashboard.putNumber("Front Right Encoder Dist", FREncoderDist);
+    	SmartDashboard.putNumber("Back Left Encoder Dist", BLEncoderDist);
+    	SmartDashboard.putNumber("Back Right Encoder Dist", BREncoderDist);
     	
     	double FLEncoderRate = this.getFLEncRate();
     	double FREncoderRate = this.getFREncRate();
@@ -232,9 +230,9 @@ public class Movement {
     	
     	    	
     	rotaion.display();
-    	
-	}
-	
+}	
+
+
 	public void autonomousUpdate(double forward, double right, double turnRight){
 		 
 		rotaion.reset();
@@ -243,15 +241,21 @@ public class Movement {
 		lateralInput = right;
 		rotaionInput = turnRight;
 
- 		
- 		this.setFrontRight(this.getFrontRight());
- 		this.setFrontLeft(this.getFrontLeft());
- 		this.setBackRight(this.getBackRight());
- 		this.setBackLeft(this.getBackLeft());	
-	 }
+	 
+		this.setFrontRight(this.getFrontRight());
+	 	this.setFrontLeft(this.getFrontLeft());
+	 	this.setBackRight(this.getBackRight());
+	 	this.setBackLeft(this.getBackLeft());	
+ }
+
+ 	public void update()
+ {
+
+ }
 
 
-	
-	
-	*/
+
+*/
 }
+
+

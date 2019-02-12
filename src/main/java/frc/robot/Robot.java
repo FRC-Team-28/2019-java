@@ -16,15 +16,17 @@ public class Robot extends IterativeRobot
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
+	private boolean isSpark = true;
 	
 	Controller controller1;
 	Controller controller2;
 	Rotaion rotaion;
-	Movement move;
+	// Movement move;
+	//SparkMovement spark;
 	ArmMovement arm;
 	Winch winch;
 	Elevator e;
-	Limelight lime; 
+	// Limelight lime; 
 	Vision vis;
 	
 	/* This is the method that runs right as the code runs on the robot.
@@ -40,11 +42,13 @@ public class Robot extends IterativeRobot
 		controller1 = new Controller(); // object for the driver controller
 		controller2 = new Controller();
 		rotaion = new Rotaion(); // object for rotaion class
-		move = new Movement(controller1, rotaion); // movement object for drive code
+		// move = new Movement(controller1, rotaion); // movement object for drive code
 		winch = new Winch(controller2); //WINCH time 
 		e = new Elevator(controller2);
 		vis = new Vision();
-		lime = new Limelight(move, controller2, vis);
+		//lime = new Limelight(move, controller2, vis);
+		//spark = new SparkMovement(controller1, rotaion);
+		arm = new ArmMovement(controller2);
 		
 		
 	}
@@ -58,7 +62,7 @@ public class Robot extends IterativeRobot
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
 		System.out.println("Auto selected: " + m_autoSelected);
-		move.resetEncoder();
+	//	move.resetEncoder();
 	}
 
 	/* This runs in a loop while in auto
@@ -84,7 +88,7 @@ public class Robot extends IterativeRobot
 	public void teleopInit() 
 	{
 		rotaion.gyroReset();
-		move.resetEncoder();
+		//move.resetEncoder();
 	}
 	
 	/* Runs in a loop during teleop
@@ -95,20 +99,34 @@ public class Robot extends IterativeRobot
 		
 		controller1.update();
 		controller2.update();
-		move.update();
+
+		// if(isSpark == true)
+		// {
+		// 	spark.update();
+		// }
+		// else
+		// {
+		// 	move.update();
+		// }
+
+		// move.update();
+
+		arm.update();
 		winch.update();
-		move.display();
+		// move.display();
 		e.update();	
-		lime.update();
-		if(controller1.getButton("chase") == true)
+		//lime.update();
+		// if(controller1.getButton("chase") == true)
+		// {
+		// 	lime.test();
+		// }
+		if(controller2.getButton("elevator"))
 		{
-			lime.test();
+			e.update();
 		}
-		//Uncomment when limelight is plugged in
-		//lime.SwitchLimelight();
-		vis.update();
-		lime.test2();
-		// arm.update();	
+
+
+			
 	}
 }
 

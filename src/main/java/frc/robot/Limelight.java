@@ -10,7 +10,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 
 public class Limelight {
-
+/*
 	Controller controller2;
 	Controller controller1;
 	Movement move;
@@ -25,8 +25,11 @@ public class Limelight {
 	NetworkTableEntry ledMode;
 	boolean limelightSwitch = false;
 	Vision light; 
-	boolean toggle = false;
+	boolean toggleLimelightSwitch = false;
 	boolean stupidLimelightTargetingStuff = false;
+	boolean test2 = false;
+	boolean toggleTest2 = false;
+	boolean toggle = false;
 	
 	
 	
@@ -40,6 +43,7 @@ public class Limelight {
 			SmartDashboard.getNumber("rotation_P", 0),
 			SmartDashboard.getNumber("rotation_I", 0),
 			SmartDashboard.getNumber("rotation_D", 0),
+			SmartDashboard.getNumber("rotation_F", 0),
 			SmartDashboard.getNumber("rotation_SetPoint", 0)
 			);
 
@@ -48,12 +52,14 @@ public class Limelight {
 			SmartDashboard.getNumber("leftRight_P", 0),
 			SmartDashboard.getNumber("leftRight_I", 0),
 			SmartDashboard.getNumber("leftRight_D", 0),
+			SmartDashboard.getNumber("rotation_F", 0),
 			SmartDashboard.getNumber("leftRight_SetPoint", 0)
 			);
 		distancePID = new PID(
 			SmartDashboard.getNumber("distance_P", 0),
 			SmartDashboard.getNumber("distance_I", 0),
 			SmartDashboard.getNumber("distance_D", 0),
+			SmartDashboard.getNumber("rotation_F", 0),
 			SmartDashboard.getNumber("distance_SetPoint", 0)
 			);
 		
@@ -101,6 +107,7 @@ public class Limelight {
 	
 	public void test2()
 	{
+
 		if(stupidLimelightTargetingStuff)
 		{
 			if(tx.getDouble(0) < -3)
@@ -114,12 +121,13 @@ public class Limelight {
 			else
 			{
 				if(ta.getDouble(0) < 0.7)
+				{
 					move.autonomousUpdate(-0.5, 0, 0); 
+				}
 			}
 		}
-
-
 	}
+
 	public void blink()
 	{
 		ledMode.setDouble(2);
@@ -137,12 +145,24 @@ public class Limelight {
 
 		// }
 
+
 		if(controller2.getButton("blink") == true)
 		{
 			this.blink();
 		}
 
 
+		if (test2 = true); 
+		{
+			controller1.getButton("limelight Test");
+		}
+			
+		SwitchLimelight();
+		if (test2)
+		{
+		   test2();
+		}
+  
 		
 
 	}
@@ -157,15 +177,15 @@ public class Limelight {
 	}
 	
 //Uncomment when limelight is in
-/*
+
 	public void SwitchLimelight()
 	{
 
 		if (controller1.getButton("light"))
 		{
-			toggle = !toggle;
+			toggleLimelightSwitch = !toggleLimelightSwitch;
 		}
-		if(toggle)
+		if(toggleLimelightSwitch)
 		{
 			if(light.getLEDMode() == 1 && toggle)
 			{
@@ -179,6 +199,7 @@ public class Limelight {
 		}
 		System.out.println(toggle);
 	}	
-	*/
 	
-}
+*/
+
+	}

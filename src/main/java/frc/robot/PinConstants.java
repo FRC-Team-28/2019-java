@@ -17,11 +17,14 @@ public class PinConstants {
 
 		
 		//PWM 
-		public static final int ARM = 1, VAC_MOTOR = 1, WINCH_SPARK = 0, ELEVATOR_MOTOR = 4;
+		public static final int VAC_MOTOR = 1, WINCH_SPARK = 0, ELEVATOR_MOTOR = 4, ARM_1 = 5, ARM_2 = 6;
 		
 		//DIO
-		public static final int  VAC_SWITCH = 1, UP_LIM = 5, DOWN_LIM = 6; 
-		
+		public static final int FL_ENC_A = 0, FL_ENC_B = 1, FR_ENC_A = 2, FR_ENC_B = 3,
+								BL_ENC_A = 4, BL_ENC_B = 5, BR_ENC_A = 6, BR_ENC_B = 7,
+								ELEV_ENC_A = 8, ELEV_ENC_B = 9, 
+		VAC_SWITCH = 10, 
+		UP_LIM = 11, DOWN_LIM = 12; 
 		
 	
 }

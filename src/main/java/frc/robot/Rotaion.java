@@ -14,10 +14,11 @@ public class Rotaion{
 	private ADXRS450_Gyro gyro;
 	
 	
-	public Rotaion(){
+	public Rotaion()
+	{
 		gyro = new ADXRS450_Gyro();
 		header = gyro.getAngle();
-		pid = new PID(0, 0, 0, gyro.getAngle());
+		pid = new PID(0, 0, 0, 0, gyro.getAngle());
 	}
 	
 	/*

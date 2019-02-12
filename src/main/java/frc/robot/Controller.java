@@ -41,6 +41,7 @@ public class Controller {
 		buttonMap.put("light", Controller2.getYButton());
 		buttonMap.put("blink", Controller2.getXButton());
 		buttonMap.put("stopLime", Controller2.getAButton());
+		buttonMap.put("limelight Test", Controller1.getBButton());
 
 		
 

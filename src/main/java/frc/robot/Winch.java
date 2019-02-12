@@ -2,14 +2,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Spark;
 
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.wpilibj.Encoder;
 
 public class Winch
 {
-
-    Encoder enc = new Encoder(0, 1);
 
     Controller controller2;
         
