@@ -16,15 +16,14 @@ public class Robot extends IterativeRobot
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
-	private boolean isSpark = true;
 	
 	Controller controller1;
 	Controller controller2;
 	Rotaion rotaion;
 	// Movement move;
-	//SparkMovement spark;
-	ArmMovement arm;
-	Winch winch;
+	SparkMovement sparkMovement;
+	Lift arm;
+	//Winch winch;
 	Elevator e;
 	// Limelight lime; 
 	Vision vis;
@@ -43,12 +42,12 @@ public class Robot extends IterativeRobot
 		controller2 = new Controller();
 		rotaion = new Rotaion(); // object for rotaion class
 		// move = new Movement(controller1, rotaion); // movement object for drive code
-		winch = new Winch(controller2); //WINCH time 
+		//winch = new Winch(controller2); //WINCH time 
 		e = new Elevator(controller2);
 		vis = new Vision();
 		//lime = new Limelight(move, controller2, vis);
-		//spark = new SparkMovement(controller1, rotaion);
-		arm = new ArmMovement(controller2);
+		sparkMovement = new SparkMovement(controller1, rotaion);
+		arm = new Lift(controller2);
 		
 		
 	}
@@ -100,30 +99,21 @@ public class Robot extends IterativeRobot
 		controller1.update();
 		controller2.update();
 
-		// if(isSpark == true)
-		// {
-		// 	spark.update();
-		// }
-		// else
-		// {
-		// 	move.update();
-		// }
-
-		// move.update();
-
 		arm.update();
-		winch.update();
+		
 		// move.display();
+		// move.update();-
+		
+		sparkMovement.update();
+		
 		e.update();	
+		
+		arm.update();
 		//lime.update();
-		// if(controller1.getButton("chase") == true)
-		// {
-		// 	lime.test();
-		// }
-		if(controller2.getButton("elevator"))
-		{
-			e.update();
-		}
+		
+
+		
+
 
 
 			

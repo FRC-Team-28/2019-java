@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * (not entirely sure how it works)osmosis
  */
 
-public class PID {
+ 
+public class PID
+{
 	double kP;
 	double kI;
 	double kD;
@@ -19,7 +21,8 @@ public class PID {
 	double prevError = 0.0;
 	double error = 0.0;
 	
-	public PID(double kP, double kI, double kD, double kF, double setpoint) {
+	public PID(double kP, double kI, double kD, double kF, double setpoint) 
+	{
 		this.kP = kP;
 		this.kI = kI;
 		this.kD = kD;
@@ -30,18 +33,20 @@ public class PID {
 		SmartDashboard.putNumber("kI", kI);
 		SmartDashboard.putNumber("kD", kD);
 		SmartDashboard.putNumber("kF", kF);
-		// epic gays only LOL XD
 	}
 	
-	public double getSetpoint() {
+	public double getSetpoint() 
+	{
 		return setpoint;
 	}
 	
-	public void setSetpoint(double setpoint) {
+	public void setSetpoint(double setpoint) 
+	{
 		this.setpoint = setpoint;
 	}
 	
-	public double update(double processVariable) {
+	public double update(double processVariable) 
+	{
 		
 		prevError = error;
 		error = setpoint - processVariable;
@@ -56,8 +61,4 @@ public class PID {
 		return kP * error + kI * integral + kD * (error - prevError);
 	}
 
-	
-	
 }
-
-  

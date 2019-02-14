@@ -35,9 +35,9 @@ public class Controller {
 		axisMap.put("turnRight", Controller1.getTriggerAxis(GenericHID.Hand.kRight) - (Controller1.getTriggerAxis(GenericHID.Hand.kLeft)));
 		buttonMap.put("Zucc", Controller2.getAButton());
 		buttonMap.put("UnZucc", Controller2.getBButton());
-		axisMap.put("winch", Controller2.getY(GenericHID.Hand.kLeft)); 
+		axisMap.put("arm", Controller2.getY(GenericHID.Hand.kLeft)); 
 		axisMap.put("elevator", Controller2.getY(GenericHID.Hand.kRight)); 
-		buttonMap.put("chase", Controller1.getAButton());
+		//buttonMap.put("chase", Controller1.getAButton());
 		buttonMap.put("light", Controller2.getYButton());
 		buttonMap.put("blink", Controller2.getXButton());
 		buttonMap.put("stopLime", Controller2.getAButton());

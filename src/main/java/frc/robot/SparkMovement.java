@@ -5,8 +5,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Encoder;
 
 public class SparkMovement{
-/*
-    private Spark bL = new Spark(PinConstants.BL_MOTOR);
+
+    // private Spark bL = new Spark(PinConstants.BL_MOTOR);
+	// private Spark bR = new Spark(PinConstants.BR_MOTOR);
+	// private Spark fL = new Spark(PinConstants.FL_MOTOR);
+	// private Spark fR = new Spark(PinConstants.FR_MOTOR);
+	
+	private Spark bL = new Spark(PinConstants.BL_MOTOR);
 	private Spark bR = new Spark(PinConstants.BR_MOTOR);
 	private Spark fL = new Spark(PinConstants.FL_MOTOR);
     private Spark fR = new Spark(PinConstants.FR_MOTOR);
@@ -19,8 +24,9 @@ public class SparkMovement{
     boolean useThresh;
     Rotaion rotaion;
  
-    private Encoder fL_Enc = new Encoder(PinConstants.FL_ENC_A, PinConstants.FR_ENC_B);
-    private Encoder fR_Enc = new Encoder(PinConstants.FR_ENC_A, PinConstants.FR_ENC_B);
+    private Encoder fL_Enc = new Encoder(PinConstants.FL_ENC_A, PinConstants.FL_ENC_B);
+	//TODO: Something else is trying to use DIO pins 2,3 and causing
+	private Encoder fR_Enc = new Encoder(13,14);
     private Encoder bL_Enc = new Encoder(PinConstants.BL_ENC_A, PinConstants.BL_ENC_B);
     private Encoder bR_Enc = new Encoder(PinConstants.BR_ENC_A, PinConstants.BR_ENC_B);
 
@@ -250,12 +256,23 @@ public class SparkMovement{
 
  	public void update()
  {
+	rotaion.reset();
+		 
+	forwardInput = controller.getAxis("forward");
+	lateralInput = controller.getAxis("right");
+	rotaionInput = controller.getAxis("turnRight");
 
+	this.setFrontRight(this.getFrontRight());
+	this.setFrontLeft(this.getFrontLeft());
+	this.setBackRight(this.getBackRight());
+	this.setBackLeft(this.getBackLeft());		
  }
 
+ 
 
 
-*/
+
+
 }
 
 

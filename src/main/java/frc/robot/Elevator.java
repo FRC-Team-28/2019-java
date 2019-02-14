@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.AnalogTrigger;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 
 
 
@@ -14,24 +17,27 @@ public class Elevator
     
     Controller controller;
 
-    private Spark elevator = new Spark(PinConstants.ELEVATOR_MOTOR);
     private AnalogTrigger limit = new AnalogTrigger(PinConstants.ELEVATOR_SWITCH); 
-    private Encoder elev_Enc = new Encoder(PinConstants.ELEV_ENC_A, PinConstants.FR_ENC_B);
        
+    private TalonSRX elevator = new TalonSRX(PinConstants.ELEV_TALON);
+
     
     public Elevator(Controller newController)
     {
         controller = newController;
     }
-             public void update()
+    
+    public void update()
     {
         
-        if (limit.getTriggerState() == false) 
-        {
-            this.setElevator(this.getElevator());
-        }
-        else   
-            this.setElevator(0);
+        // if (limit.getTriggerState() == false) 
+        // {
+        //     this.setElevator(this.getElevator());
+        // }
+        // else   
+        //     this.setElevator(0);
+
+        this.setElevator(this.getElevator());
                                                                                    
     }   
     public double getElevator()
@@ -41,27 +47,22 @@ public class Elevator
 
     public void setElevator(double x)
     {
-        elevator.set(x);
+        elevator.set(ControlMode.PercentOutput, x);
     }
 
     public void encReset()
     {
-       elev_Enc.reset();
+        elevator.getSensorCollection().setQuadraturePosition(0,0);
    }
 
    public double getElevEncDist()
    {
-       return elev_Enc.getDistance();
+       return elevator.getSensorCollection().getQuadraturePosition();
    }
    
-   public boolean getElevEncDirection()
-     {
-        return elev_Enc.getDirection();
-     }
-
      public double getElevEncRate()
      {
-         return elev_Enc.getRate();
+         return elevator.getSensorCollection().getQuadratureVelocity();
      }
  
     
@@ -75,12 +76,9 @@ public class Elevator
 
             SmartDashboard.putNumber("", controller.getAxis(""));
             SmartDashboard.putNumber("Elevator Input", this.getElevator());
-
-
-            
-
-        
     }
+
+    
 
 
     

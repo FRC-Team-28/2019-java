@@ -12,17 +12,19 @@ public class PinConstants {
 		
 		//CAN
 		// public static final int FL_MOTOR = 2, FR_MOTOR = 3, BR_MOTOR = 4, BL_MOTOR = 1;
+		
 
-		public static final int FL_MOTOR = 3, FR_MOTOR = 1, BR_MOTOR = 2, BL_MOTOR = 0, WINCH_TALON = 4;
+		public static final int  ELEV_TALON = 4, ARM_1 = 1, ARM_2 = 2, VAC_MOTOR = 0;
+
 
 		
 		//PWM 
-		public static final int VAC_MOTOR = 1, WINCH_SPARK = 0, ELEVATOR_MOTOR = 4, ARM_1 = 5, ARM_2 = 6;
+		public static final int FL_MOTOR = 3, FR_MOTOR = 2, BR_MOTOR = 0, BL_MOTOR = 1;
 		
+
 		//DIO
 		public static final int FL_ENC_A = 0, FL_ENC_B = 1, FR_ENC_A = 2, FR_ENC_B = 3,
 								BL_ENC_A = 4, BL_ENC_B = 5, BR_ENC_A = 6, BR_ENC_B = 7,
-								ELEV_ENC_A = 8, ELEV_ENC_B = 9, 
 		VAC_SWITCH = 10, 
 		UP_LIM = 11, DOWN_LIM = 12; 
 		
