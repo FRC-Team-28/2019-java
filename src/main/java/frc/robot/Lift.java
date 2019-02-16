@@ -27,11 +27,13 @@ public class Lift {
 	
 	//TODO tune PID and set starting position
 	
-	public ArmMovement(Controller c){
+	public Lift(Controller c)
+	{
 		controller2 = c;
 	}
 	
-	public void setPosition(double position) {
+	public void setPosition(double position) 
+	{
 		pid.setSetpoint(position);
 	}
 	
@@ -47,7 +49,8 @@ public class Lift {
 	}
 	
 
-	public void update(){
+	public void update()
+	{
 		this.setArm(this.getArm());		
 	}
 	
