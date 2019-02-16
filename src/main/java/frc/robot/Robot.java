@@ -16,7 +16,8 @@ public class Robot extends IterativeRobot
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
-	
+	boolean dshdsh = true;
+
 	Controller controller1;
 	Controller controller2;
 	Rotaion rotaion;
@@ -25,8 +26,9 @@ public class Robot extends IterativeRobot
 	Lift arm;
 	//Winch winch;
 	Elevator e;
-	// Limelight lime; 
+	// Lime`ight lime; 
 	Vision vis;
+	Wrist wrist;
 	
 	/* This is the method that runs right as the code runs on the robot.
 	 * This is where we construct our objects
@@ -48,6 +50,7 @@ public class Robot extends IterativeRobot
 		//lime = new Limelight(move, controller2, vis);
 		sparkMovement = new SparkMovement(controller1, rotaion);
 		arm = new Lift(controller2);
+		wrist = new Wrist(controller1);
 		
 		
 	}
@@ -110,6 +113,8 @@ public class Robot extends IterativeRobot
 		
 		arm.update();
 		//lime.update();
+
+		wrist.update();
 		
 
 		
