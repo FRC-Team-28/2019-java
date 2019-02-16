@@ -7,6 +7,7 @@ public class Zucc {
 	private Controller controller;
 	private DigitalInput vacSwitch = new DigitalInput(PinConstants.VAC_SWITCH);
 	private Spark motor = new Spark(PinConstants.VAC_MOTOR);
+
 	private boolean isZuccing = false;
 	
 	public Zucc(Controller newController)

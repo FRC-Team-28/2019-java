@@ -27,7 +27,7 @@ public class Lift {
 	
 	//TODO tune PID and set starting position
 	
-	public ArmMovement(Controller c){
+	public Lift(Controller c){
 		controller2 = c;
 	}
 	
@@ -42,8 +42,8 @@ public class Lift {
 
 	public void setArm(double x)
 	{
-		motor1.set(ControlMode.PercentOutput, x/4);
-		motor2.set(ControlMode.PercentOutput, -x/4);
+		motor1.set(ControlMode.PercentOutput, x);
+		motor2.set(ControlMode.PercentOutput, -x);
 	}
 	
 
@@ -51,6 +51,10 @@ public class Lift {
 		this.setArm(this.getArm());		
 	}
 	
+	public void display()
+	{
+
+	}
 	
 	
 	
