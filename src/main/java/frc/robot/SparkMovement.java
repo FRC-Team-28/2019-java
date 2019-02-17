@@ -21,7 +21,7 @@ public class SparkMovement{
     private double rotaionInput = 0;    
     
     Controller controller;
-    boolean useThresh;
+    boolean useThresh = false;
     Rotaion rotaion;
  
     private Encoder fL_Enc = new Encoder(PinConstants.FL_ENC_A, PinConstants.FL_ENC_B);
@@ -38,6 +38,14 @@ public class SparkMovement{
     }
     
     public double getFrontLeft(){
+		/*
+		if(-1 * (forwardInput - lateralInput - rotaion.update(rotaionInput)) > thresh || -1 * (forwardInput - lateralInput - rotaion.update(rotaionInput)) < -thresh)
+			return -1 * (forwardInput - lateralInput - rotaion.update(rotaionInput));
+		else
+			return 0;
+		*/
+
+		
 		if(useThresh)
 		{
 			if(-1 * (forwardInput - lateralInput - rotaion.update(rotaionInput)) > thresh || -1 * (forwardInput - lateralInput - rotaion.update(rotaionInput)) < -thresh)
@@ -47,6 +55,7 @@ public class SparkMovement{
 		}
 		else
 			return -1 * (forwardInput - lateralInput - rotaion.update(rotaionInput)); 
+		
 
     }
 	
@@ -55,6 +64,7 @@ public class SparkMovement{
 	}
 	
 	public double getFrontRight(){
+		
 		
 		if(useThresh)
 		{
@@ -65,7 +75,7 @@ public class SparkMovement{
 		}
 		else
 			return (forwardInput + lateralInput + rotaion.update(rotaionInput)); 
-
+		
 
 	}
     

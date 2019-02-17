@@ -5,9 +5,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class Wrist {
 
-    private TalonSRX wrist = new TalonSRX(PinConstants.WRIST);
+    private TalonSRX wrist = new TalonSRX(PinConstants.WRIST_MOTOR);
     Controller controller;
-    boolean dshdsh = true;
 
     public Wrist(Controller newController)
     {
@@ -16,7 +15,8 @@ public class Wrist {
 
     public double getWrist()
     {
-        return controller.getAxis("wrist");
+            return controller.getAxis("wrist");
+        
     }
 
     public void setWrist(double x)

@@ -10,16 +10,20 @@ public class PinConstants {
 		//ANALOG
 		public static final int GYRO_PIN = 1, ARM_POT = 2, ELEVATOR_SWITCH = 3;
 		
-		//CAN
-		// public static final int FL_MOTOR = 2, FR_MOTOR = 3, BR_MOTOR = 4, BL_MOTOR = 1;
+		//TALONS
+		public static final int
+		    LEFT_HAB_MOTOR = 0,
+			VAC_MOTOR = 1,
+			ARM_MOTOR = 2,
+			RIGHT_HAB_MOTOR = 3,
+			ELEVATOR_MOTOR = 4, 
+			HAB_VACUUM_MOTOR = 5,
+			WRIST_MOTOR = 6;
+
+
 		
-
-		public static final int  ELEV_TALON = 4, ARM_1 = 1, ARM_2 = 2, WRIST = 0;
-
-
-		
-		//PWM 
-		public static final int FL_MOTOR = 3, FR_MOTOR = 2, BR_MOTOR = 0, BL_MOTOR = 1, VAC_MOTOR = 4;
+		//SPARK/PWM 
+		public static final int FL_MOTOR = 3, FR_MOTOR = 2, BR_MOTOR = 0, BL_MOTOR = 1;
 		
 
 		//DIO
@@ -27,6 +31,15 @@ public class PinConstants {
 								BL_ENC_A = 4, BL_ENC_B = 5, BR_ENC_A = 6, BR_ENC_B = 7, 
 		VAC_SWITCH = 10, 
 		UP_LIM = 11, DOWN_LIM = 12; 
+
+
+
+
+		//ELEVATOR PID
+
+		public static final int TIMEOUT_MS = 30, PID_LOOP_IDX = 0, SLOT_IDX = 0;
+
+		static final Gains Gains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
 		
 	
 }

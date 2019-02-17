@@ -5,13 +5,15 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+
+// import com.ctre.phoenix.motorcontrol.ControlMode;
+// import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+// import edu.wpi.first.wpilibj.DigitalInput;
 /* This is our main or robot class. 
  * 
  */
 
-
-public class Robot extends IterativeRobot 
-{
+public class Robot extends IterativeRobot {
 	private static final String kDefaultAuto = "Default";
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
@@ -24,105 +26,105 @@ public class Robot extends IterativeRobot
 	// Movement move;
 	SparkMovement sparkMovement;
 	Lift arm;
-	//Winch winch;
+	// Winch winch;
 	Elevator e;
-	// Lime`ight lime; 
+	// Lime`ight lime;
 	Vision vis;
 	Wrist wrist;
-	
-	/* This is the method that runs right as the code runs on the robot.
-	 * This is where we construct our objects
+	Zucc zucc;
+	boolean isZuccing;
+
+	// private TalonSRX zuccMotor = new TalonSRX(PinConstants.VAC_MOTOR);
+	// private DigitalInput vacSwitch = new DigitalInput(PinConstants.VAC_SWITCH);
+
+	/*
+	 * This is the method that runs right as the code runs on the robot. This is
+	 * where we construct our objects
 	 */
 	@Override
-	public void robotInit() 
-	{
-		m_chooser.addDefault("Default Auto", kDefaultAuto); 
+	public void robotInit() {
+		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
-		
+
 		controller1 = new Controller(); // object for the driver controller
 		controller2 = new Controller();
 		rotaion = new Rotaion(); // object for rotaion class
 		// move = new Movement(controller1, rotaion); // movement object for drive code
-		//winch = new Winch(controller2); //WINCH time 
+		// winch = new Winch(controller2); //WINCH time
 		e = new Elevator(controller2);
 		vis = new Vision();
-		//lime = new Limelight(move, controller2, vis);
+		// lime = new Limelight(move, controller2, vis);
 		sparkMovement = new SparkMovement(controller1, rotaion);
 		arm = new Lift(controller2);
 		wrist = new Wrist(controller1);
-		
-		
+		zucc = new Zucc(controller2);
+
+		isZuccing = false;
+
+		// smoothing = 0;
+
 	}
 
-	/* This runs once as soon as auto starts 
+	/*
+	 * This runs once as soon as auto starts
 	 */
 	@Override
-	public void autonomousInit() 
-	{
+	public void autonomousInit() {
 		m_autoSelected = m_chooser.getSelected();
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
 		System.out.println("Auto selected: " + m_autoSelected);
-	//	move.resetEncoder();
+		// move.resetEncoder();
 	}
 
-	/* This runs in a loop while in auto
+	/*
+	 * This runs in a loop while in auto
 	 */
 	@Override
-	public void autonomousPeriodic() 
-	{
-		switch (m_autoSelected) 
-		{
-			case kCustomAuto:
-				// Put custom auto code here
-				break;
-			case kDefaultAuto:
-			default:
-				// Put default auto code here
-				break;
+	public void autonomousPeriodic() {
+		switch (m_autoSelected) {
+		case kCustomAuto:
+			// Put custom auto code here
+			break;
+		case kDefaultAuto:
+		default:
+			// Put default auto code here
+			break;
 		}
 	}
 
-	/* Runs as soon as teleop starts
+	/*
+	 * Runs as soon as teleop starts
 	 */
 	@Override
-	public void teleopInit() 
-	{
+	public void teleopInit() {
 		rotaion.gyroReset();
-		//move.resetEncoder();
+		// move.resetEncoder();
 	}
-	
-	/* Runs in a loop during teleop
+
+	/*
+	 * Runs in a loop during teleop
 	 */
 	@Override
-	public void teleopPeriodic() 
-	{
-		
+	public void teleopPeriodic() {
+
 		controller1.update();
 		controller2.update();
 
 		arm.update();
-		
+
 		// move.display();
 		// move.update();-
-		
+
 		sparkMovement.update();
-		
-		e.update();	
-		
-		arm.update();
-		//lime.update();
+
+		zucc.update();
+		e.update();
+		// lime.update();
 
 		wrist.update();
-		
 
-		
-
-
-
-			
 	}
+
 }
-
-
