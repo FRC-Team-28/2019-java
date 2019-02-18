@@ -6,7 +6,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class Zucc {
-	
+
 	private Controller controller;
 	private DigitalInput vacSwitch = new DigitalInput(PinConstants.VAC_SWITCH);
 	private TalonSRX motor = new TalonSRX(PinConstants.VAC_MOTOR);
@@ -17,9 +17,43 @@ public class Zucc {
 	{
 		controller = newController;
 	}
-	
+
 	public void update()
 	{
+
+		if(controller.getButton("Zucc") && !isZuccing)
+		{
+			isZuccing = true;
+			partialZucc = false;
+		}
+		else if(controller.getButton("Zucc") && isZuccing)
+		{
+			isZuccing = false;
+		}
+
+		if(controller.getButton("partialZucc") && !partialZucc)
+		{
+			partialZucc = true;
+			isZuccing = false;
+		}
+		else if(controller.getButton("partialZucc") && partialZucc)
+		{
+			partialZucc = false;
+		}
+
+		if(isZuccing)
+		{
+			motor.set(ControlMode.PercentOutput, -1);
+		}
+		else if(partialZucc)
+		{
+			motor.set(ControlMode.PercentOutput, -0.4);
+		}
+		else
+			motor.set(ControlMode.PercentOutput, 0);
+
+
+		/*
 		if(controller.getButton("Zucc") && !isZuccing)
 		{
 			isZuccing = true;
@@ -38,13 +72,6 @@ public class Zucc {
 			partialZucc = false;
 		}
 
-	// 	if(partialZucc)
-	// 	{
-	// 		motor.set(ControlMode.PercentOutput, -0.5);
-	// 	}
-	// 	else
-	// 		motor.set(ControlMode.PercentOutput, 0);
-
 		if(isZuccing && !partialZucc)
 		{
 			motor.set(ControlMode.PercentOutput, -1);
@@ -59,6 +86,7 @@ public class Zucc {
 		}
 		else
 			motor.set(ControlMode.PercentOutput, 0);
+		*/
 
 	}
 }
