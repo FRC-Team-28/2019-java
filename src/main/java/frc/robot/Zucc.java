@@ -12,6 +12,7 @@ public class Zucc {
 	private TalonSRX motor = new TalonSRX(PinConstants.VAC_MOTOR);
 
 	private boolean isZuccing = false;
+	private boolean partialZucc = false;
 	public Zucc(Controller newController)
 	{
 		controller = newController;
@@ -19,23 +20,45 @@ public class Zucc {
 	
 	public void update()
 	{
-		if(controller.getButton("Zucc"))
-			{
-				isZuccing = true;
-			}
-
-		if(controller.getButton("UnZucc"))
+		if(controller.getButton("Zucc") && !isZuccing)
 		{
-
+			isZuccing = true;
+		}
+		else if(controller.getButton("Zucc") && isZuccing)
+		{
 			isZuccing = false;
 		}
 
-			if(isZuccing)
-			{
-				motor.set(ControlMode.PercentOutput, -1);
-			}
-			else
-				motor.set(ControlMode.PercentOutput, 0);
-	}
+		if(controller.getButton("partialZucc") && !partialZucc)
+		{
+			partialZucc = true;
+		}
+		else if(controller.getButton("partialZucc") && partialZucc)
+		{
+			partialZucc = false;
+		}
 
+	// 	if(partialZucc)
+	// 	{
+	// 		motor.set(ControlMode.PercentOutput, -0.5);
+	// 	}
+	// 	else
+	// 		motor.set(ControlMode.PercentOutput, 0);
+
+		if(isZuccing && !partialZucc)
+		{
+			motor.set(ControlMode.PercentOutput, -1);
+		}
+		else if(isZuccing && partialZucc)
+		{
+			motor.set(ControlMode.PercentOutput, -0.4);
+		}
+		else if(!isZuccing && partialZucc)
+		{
+			motor.set(ControlMode.PercentOutput, -0.4);
+		}
+		else
+			motor.set(ControlMode.PercentOutput, 0);
+
+	}
 }

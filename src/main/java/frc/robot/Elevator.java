@@ -92,7 +92,7 @@ public class Elevator
         //this.setElevator(this.getElevator());
 
 
-        double leftYstick = -1.0 * controller.getAxis("elevator");
+        double leftYstick = 0.5 * controller.getAxis("elevator");
         if (Math.abs(leftYstick) < 0.10)
         {
             leftYstick = 0;

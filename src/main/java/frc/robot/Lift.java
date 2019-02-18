@@ -47,7 +47,7 @@ public class Lift {
 	public void setArm(double x)
 	{
 		motor1.set(ControlMode.PercentOutput, x/2);
-		motor2.set(ControlMode.PercentOutput, -x/2);
+		motor2.set(ControlMode.PercentOutput, x/2);
 	}
 
 	

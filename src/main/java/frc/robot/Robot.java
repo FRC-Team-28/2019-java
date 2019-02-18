@@ -57,7 +57,7 @@ public class Robot extends IterativeRobot {
 		sparkMovement = new SparkMovement(controller1, rotaion);
 		arm = new Lift(controller2);
 		//wrist = new Wrist(controller1);
-		zucc = new Zucc(controller2);
+		zucc = new Zucc(controller1);
 
 		isZuccing = false;
 		e.init();
@@ -128,7 +128,7 @@ public class Robot extends IterativeRobot {
 
 	public void doWrist()
 	{
-		wrist.set(ControlMode.PercentOutput, controller1.getAxis("wrist"));
+		wrist.set(ControlMode.PercentOutput, controller2.getAxis("wrist"));
 	}
 
 }

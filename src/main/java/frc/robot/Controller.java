@@ -34,8 +34,8 @@ public class Controller {
 		axisMap.put("forward", Controller1.getY(GenericHID.Hand.kLeft)); 
 		axisMap.put("right", Controller1.getX(GenericHID.Hand.kLeft));
 		axisMap.put("turnRight", Controller1.getTriggerAxis(GenericHID.Hand.kRight) - (Controller1.getTriggerAxis(GenericHID.Hand.kLeft)));
-		buttonMap.put("Zucc", Controller2.getAButton());
-		buttonMap.put("UnZucc", Controller2.getBButton());
+		buttonMap.put("Zucc", Controller1.getAButtonPressed());
+		buttonMap.put("partialZucc", Controller1.getBButtonPressed());
 		axisMap.put("arm", Controller2.getY(GenericHID.Hand.kLeft)); 
 		axisMap.put("elevator", Controller2.getY(GenericHID.Hand.kRight)); 
 		//buttonMap.put("chase", Controller1.getAButton());
@@ -43,9 +43,9 @@ public class Controller {
 		//buttonMap.put("blink", Controller2.getXButton());
 		//buttonMap.put("stopLime", Controller2.getAButton());
 		//buttonMap.put("limelight Test", Controller1.getBButton());
-		 axisMap.put("wrist", Controller1.getY(GenericHID.Hand.kRight));
+		//  axisMap.put("wrist", Controller1.getY(GenericHID.Hand.kRight));
 
-		//axisMap.put("wrist", Controller2.getTriggerAxis(GenericHID.Hand.kRight) - (Controller2.getTriggerAxis(GenericHID.Hand.kLeft)));
+		axisMap.put("wrist", Controller2.getTriggerAxis(GenericHID.Hand.kRight) - (Controller2.getTriggerAxis(GenericHID.Hand.kLeft)));
 
 		buttonMap.put("motionMagic", Controller2.getXButton());
 		// buttonMap.put("increaseSmoothing", Controller2.getBumper(GenericHID.Hand.kRight));
@@ -72,6 +72,8 @@ public class Controller {
 	{
 		return buttonMap.get(name);
 	}
+
+	
 
 	
 
