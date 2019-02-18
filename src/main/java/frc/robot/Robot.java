@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
-// import com.ctre.phoenix.motorcontrol.ControlMode;
-// import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 // import edu.wpi.first.wpilibj.DigitalInput;
 /* This is our main or robot class. 
  * 
@@ -30,12 +30,11 @@ public class Robot extends IterativeRobot {
 	Elevator e;
 	// Lime`ight lime;
 	Vision vis;
-	Wrist wrist;
+	//Wrist wrist;
 	Zucc zucc;
 	boolean isZuccing;
 
-	// private TalonSRX zuccMotor = new TalonSRX(PinConstants.VAC_MOTOR);
-	// private DigitalInput vacSwitch = new DigitalInput(PinConstants.VAC_SWITCH);
+	private TalonSRX wrist = new TalonSRX(PinConstants.WRIST_MOTOR);
 
 	/*
 	 * This is the method that runs right as the code runs on the robot. This is
@@ -57,11 +56,11 @@ public class Robot extends IterativeRobot {
 		// lime = new Limelight(move, controller2, vis);
 		sparkMovement = new SparkMovement(controller1, rotaion);
 		arm = new Lift(controller2);
-		wrist = new Wrist(controller1);
+		//wrist = new Wrist(controller1);
 		zucc = new Zucc(controller2);
 
 		isZuccing = false;
-
+		e.init();
 		// smoothing = 0;
 
 	}
@@ -113,7 +112,6 @@ public class Robot extends IterativeRobot {
 		controller2.update();
 
 		arm.update();
-
 		// move.display();
 		// move.update();-
 
@@ -123,8 +121,14 @@ public class Robot extends IterativeRobot {
 		e.update();
 		// lime.update();
 
-		wrist.update();
+		doWrist();
 
+		e.Display();
+	}
+
+	public void doWrist()
+	{
+		wrist.set(ControlMode.PercentOutput, controller1.getAxis("wrist"));
 	}
 
 }

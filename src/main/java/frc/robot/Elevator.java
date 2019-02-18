@@ -93,12 +93,16 @@ public class Elevator
 
 
         double leftYstick = -1.0 * controller.getAxis("elevator");
-		if (Math.abs(leftYstick) < 0.10) { leftYstick = 0;} /* deadband 10% */
+        if (Math.abs(leftYstick) < 0.10)
+        {
+            leftYstick = 0;
+        } /* deadband 10% */
 
 		/* Get current Talon SRX motor output */
         double motorOutput = elevator.getMotorOutputPercent();
         
-        if (controller.getButton("motionMagic")) {
+        if (controller.getButton("motionMagic")) 
+        {
 			/* Motion Magic */ 
 			
 			/*4096 ticks/rev * 10 Rotations in either direction */
@@ -107,9 +111,10 @@ public class Elevator
 
 			/* Append more signals to print when in speed mode */
 			
-		} else {
+        } 
+        else 
+        {
 			/* Percent Output */
-
 			elevator.set(ControlMode.PercentOutput, leftYstick);
         }
         
@@ -128,28 +133,24 @@ public class Elevator
     public void encReset()
     {
         elevator.getSensorCollection().setQuadraturePosition(0,0);
-   }
+    }
 
    public double getElevEncDist()
    {
        return elevator.getSensorCollection().getQuadraturePosition();
    }
    
-     public double getElevEncRate()
-     {
-         return elevator.getSensorCollection().getQuadratureVelocity();
-     }
+    public double getElevEncRate()
+    {
+        return elevator.getSensorCollection().getQuadratureVelocity();
+    }
  
     
     public void Display()
     {
-        double ElevEncDist = this.getElevEncDist();
-        SmartDashboard.putNumber("Elevator Encoder Dist", ElevEncDist);
-
-        double ElevEncRate = this.getElevEncRate();
-        SmartDashboard.putNumber("Elevator Encoder Rate", ElevEncRate);
-
-           
+        SmartDashboard.putNumber("P", PinConstants.Gains.kP);
+        SmartDashboard.putNumber("I", PinConstants.Gains.kI);
+        SmartDashboard.putNumber("D", PinConstants.Gains.kD);
     }
 
     

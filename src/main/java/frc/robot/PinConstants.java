@@ -39,7 +39,7 @@ public class PinConstants {
 
 		public static final int TIMEOUT_MS = 30, PID_LOOP_IDX = 0, SLOT_IDX = 0;
 
-		static final Gains Gains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
+		static final Gains Gains = new Gains(0.5, 0.0, 0.0, 0.2, 0, 1.0);
 		
 	
 }
