@@ -25,7 +25,7 @@ public class Robot extends IterativeRobot {
 	Rotaion rotaion;
 	// Movement move;
 	SparkMovement sparkMovement;
-	Lift arm;
+	Arm arm;
 	// Winch winch;
 	Elevator e;
 	// Lime`ight lime;
@@ -55,7 +55,7 @@ public class Robot extends IterativeRobot {
 		vis = new Vision();
 		// lime = new Limelight(move, controller2, vis);
 		sparkMovement = new SparkMovement(controller1, rotaion);
-		arm = new Lift(controller2);
+		arm = new Arm(controller2);
 		//wrist = new Wrist(controller1);
 		zucc = new Zucc(controller1);
 

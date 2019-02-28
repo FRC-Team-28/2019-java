@@ -9,35 +9,28 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 //THIS CONTROLS THE ARM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-public class Lift {
+public class Arm {
 
 	private AnalogPotentiometer analogPot = new AnalogPotentiometer(PinConstants.ARM_POT);
 	private Controller controller2;
-	private PID pid = new PID(0,0,0,0,0);
 	
 
 
-	private TalonSRX motor1 = new TalonSRX(PinConstants.LEFT_HAB_MOTOR);
-	private TalonSRX motor2 = new TalonSRX(PinConstants.ARM_MOTOR);
+	private TalonSRX motor1 = new TalonSRX(PinConstants.RIGHT_ARM_MOTOR);
+	private TalonSRX motor2 = new TalonSRX(PinConstants.LEFT_ARM_MOTOR);
 
 
-
-	private double sped = 0.25;
 
 	public boolean dshdsh = false;
 	Movement move;
 	
 	//TODO tune PID and set starting position
 	
-	public Lift(Controller c)
+	public Arm(Controller c)
 	{
 		controller2 = c;
 	}
 	
-	public void setPosition(double position) 
-	{
-		pid.setSetpoint(position);
-	}
 	
 	public double getArm()
 	{
@@ -46,8 +39,8 @@ public class Lift {
 
 	public void setArm(double x)
 	{
-		motor1.set(ControlMode.PercentOutput, x/2);
-		motor2.set(ControlMode.PercentOutput, x/2);
+		motor1.set(ControlMode.PercentOutput, 0.75 * x);
+		motor2.set(ControlMode.PercentOutput, 0.75 * x);
 	}
 
 	
@@ -55,8 +48,14 @@ public class Lift {
 
 	public void update()
 	{
-		this.setArm(this.getArm());
-
+		if(controller2.getButton("hold"))
+		{
+			this.setArm(-0.2);
+		}
+		else
+		{
+			this.setArm(this.getArm());
+		}
 	}
 	
 	

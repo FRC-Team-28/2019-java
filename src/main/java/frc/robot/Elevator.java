@@ -49,7 +49,7 @@ public class Elevator
 		 * Phase sensor to have positive increment when driving Talon Forward (Green LED)
 		 */
 		elevator.setSensorPhase(true);
-		elevator.setInverted(false);
+		elevator.setInverted(true);
 
 		/* Set relevant frame periods to be at least as fast as periodic rate */
 		elevator.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, PinConstants.TIMEOUT_MS);
@@ -92,7 +92,7 @@ public class Elevator
         //this.setElevator(this.getElevator());
 
 
-        double leftYstick = 0.5 * controller.getAxis("elevator");
+        double leftYstick = -0.5 * controller.getAxis("elevator");
         if (Math.abs(leftYstick) < 0.10)
         {
             leftYstick = 0;
@@ -106,10 +106,8 @@ public class Elevator
 			/* Motion Magic */ 
 			
 			/*4096 ticks/rev * 10 Rotations in either direction */
-			double targetPos = leftYstick * 4096 * 10.0;
+			double targetPos = 4096 * 0.5;
 			elevator.set(ControlMode.MotionMagic, targetPos);
-
-			/* Append more signals to print when in speed mode */
 			
         } 
         else 
@@ -118,7 +116,7 @@ public class Elevator
 			elevator.set(ControlMode.PercentOutput, leftYstick);
         }
         
-                                                                                   
+                                                         
     }   
     public double getElevator()
     {
@@ -151,6 +149,7 @@ public class Elevator
         SmartDashboard.putNumber("P", PinConstants.Gains.kP);
         SmartDashboard.putNumber("I", PinConstants.Gains.kI);
         SmartDashboard.putNumber("D", PinConstants.Gains.kD);
+        SmartDashboard.putNumber("Elevator Encoder Distance", this.getElevEncDist());
     }
 
     

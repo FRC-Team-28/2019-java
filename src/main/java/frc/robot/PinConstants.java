@@ -12,10 +12,10 @@ public class PinConstants {
 		
 		//TALONS
 		public static final int
-		    LEFT_HAB_MOTOR = 0,
-			VAC_MOTOR = 1,
-			ARM_MOTOR = 2,
-			RIGHT_HAB_MOTOR = 3,
+		    VAC_MOTOR = 0,
+		    HAB_MOTOR = 1,
+			LEFT_ARM_MOTOR = 2,
+			RIGHT_ARM_MOTOR = 3,
 			ELEVATOR_MOTOR = 4, 
 			HAB_VACUUM_MOTOR = 5,
 			WRIST_MOTOR = 6;
@@ -25,7 +25,7 @@ public class PinConstants {
 		//SPARK/PWM 
 		public static final int FL_MOTOR = 3, FR_MOTOR = 2, BR_MOTOR = 0, BL_MOTOR = 1;
 		
-
+	
 		//DIO
 		public static final int FL_ENC_A = 0, FL_ENC_B = 1, FR_ENC_A = 2, FR_ENC_B = 3,
 								BL_ENC_A = 4, BL_ENC_B = 5, BR_ENC_A = 6, BR_ENC_B = 7, 

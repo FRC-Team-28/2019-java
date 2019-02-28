@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  
 public class PID
 {
+	
 	double kP;
 	double kI;
 	double kD;
@@ -29,10 +30,10 @@ public class PID
 		this.kF = kF;
 		this.setpoint = setpoint;
 	
-		SmartDashboard.putNumber("kP", kP);
-		SmartDashboard.putNumber("kI", kI);
-		SmartDashboard.putNumber("kD", kD);
-		SmartDashboard.putNumber("kF", kF);
+		// SmartDashboard.putNumber("kP", kP);
+		// SmartDashboard.putNumber("kI", kI);
+		// SmartDashboard.putNumber("kD", kD);
+		// SmartDashboard.putNumber("kF", kF);
 	}
 	
 	public double getSetpoint() 
@@ -52,13 +53,14 @@ public class PID
 		error = setpoint - processVariable;
 		integral += error*(0.02);
 		
-		kF = SmartDashboard.getNumber("kF", kF);
-		kP = SmartDashboard.getNumber("kP", kP);
-		kI = SmartDashboard.getNumber("kI", kI);
-		kD = SmartDashboard.getNumber("kD", kD);
+		// kF = SmartDashboard.getNumber("kF", kF);
+		// kP = SmartDashboard.getNumber("kP", kP);
+		// kI = SmartDashboard.getNumber("kI", kI);
+		// kD = SmartDashboard.getNumber("kD", kD);
 		
 
 		return kP * error + kI * integral + kD * (error - prevError);
 	}
+	
 
 }

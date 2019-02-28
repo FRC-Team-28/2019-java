@@ -50,6 +50,7 @@ public class Controller {
 		buttonMap.put("motionMagic", Controller2.getXButton());
 		// buttonMap.put("increaseSmoothing", Controller2.getBumper(GenericHID.Hand.kRight));
 		// buttonMap.put("decreaseSmoothing", Controller2.getBumper(GenericHID.Hand.kLeft));
+		buttonMap.put("hold", Controller2.getAButton());
 
 		
 

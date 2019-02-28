@@ -47,7 +47,7 @@ public class Zucc {
 		}
 		else if(partialZucc)
 		{
-			motor.set(ControlMode.PercentOutput, -0.4);
+			motor.set(ControlMode.PercentOutput, -0.5);
 		}
 		else
 			motor.set(ControlMode.PercentOutput, 0);
