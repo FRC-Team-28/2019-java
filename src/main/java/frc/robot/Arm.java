@@ -8,7 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
-//THIS CONTROLS THE ARM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//THIS CONTROLS THE ARM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! very observant
 public class Arm {
 
 	private AnalogPotentiometer analogPot = new AnalogPotentiometer(PinConstants.ARM_POT);
