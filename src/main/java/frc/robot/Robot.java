@@ -4,6 +4,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.CameraServer;
+
 
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -23,13 +25,11 @@ public class Robot extends IterativeRobot {
 	Controller controller1;
 	Controller controller2;
 	Rotaion rotaion;
-	// Movement move;
 	SparkMovement sparkMovement;
 	Arm arm;
-	// Winch winch;
 	Elevator e;
-	// Lime`ight lime;
 	Vision vis;
+	Lift lift;
 	//Wrist wrist;
 	Zucc zucc;
 	boolean isZuccing;
@@ -53,12 +53,13 @@ public class Robot extends IterativeRobot {
 		// winch = new Winch(controller2); //WINCH time
 		e = new Elevator(controller2);
 		vis = new Vision();
+		lift = new Lift(controller1, controller2);
 		// lime = new Limelight(move, controller2, vis);
 		sparkMovement = new SparkMovement(controller1, rotaion);
 		arm = new Arm(controller2);
-		//wrist = new Wrist(controller1);
+		// wrist = new Wrist(controller1);
 		zucc = new Zucc(controller1);
-
+		CameraServer.getInstance().startAutomaticCapture(); 
 		isZuccing = false;
 		e.init();
 		// smoothing = 0;
@@ -75,6 +76,7 @@ public class Robot extends IterativeRobot {
 		// defaultAuto);
 		System.out.println("Auto selected: " + m_autoSelected);
 		// move.resetEncoder();
+		// zucc.setZucc(true); //EXPERIMENTAL
 	}
 
 	/*
@@ -89,6 +91,19 @@ public class Robot extends IterativeRobot {
 		case kDefaultAuto:
 		default:
 			// Put default auto code here
+			controller1.update();
+			controller2.update();
+
+			arm.update();
+
+			sparkMovement.update(1);
+
+			zucc.update();
+			e.update();
+
+			doWrist();
+			lift.update();
+			e.Display();
 			break;
 		}
 	}
@@ -99,6 +114,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		rotaion.gyroReset();
+
 		// move.resetEncoder();
 	}
 
@@ -113,22 +129,22 @@ public class Robot extends IterativeRobot {
 
 		arm.update();
 		// move.display();
-		// move.update();-
+		// move.update();
 
-		sparkMovement.update();
+		sparkMovement.update(1);
 
 		zucc.update();
 		e.update();
 		// lime.update();
 
 		doWrist();
-
+		lift.update();
 		e.Display();
 	}
 
 	public void doWrist()
 	{
-		wrist.set(ControlMode.PercentOutput, controller2.getAxis("wrist"));
+		wrist.set(ControlMode.PercentOutput, controller2.getAxis("wrist") / 2);
 	}
 
 }

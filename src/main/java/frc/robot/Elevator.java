@@ -44,8 +44,8 @@ public class Elevator
 											PinConstants.TIMEOUT_MS);
 
 		/**
-		 * Configure Talon SRX Output and Sesnor direction accordingly
-		 * Invert Motor to have green LEDs when driving Talon Forward / Requesting Postiive Output
+		 * Configure Talon SRX Output and Sensor direction accordingly
+		 * Invert Motor to have green LEDs when driving Talon Forward / Requesting Postive Output
 		 * Phase sensor to have positive increment when driving Talon Forward (Green LED)
 		 */
 		elevator.setSensorPhase(true);
@@ -110,6 +110,10 @@ public class Elevator
 			elevator.set(ControlMode.MotionMagic, targetPos);
 			
         } 
+        else if(controller.getButton("hold"))
+        {
+            elevator.set(ControlMode.PercentOutput, 0.2);
+        }
         else 
         {
 			/* Percent Output */

@@ -22,7 +22,8 @@ public class SparkMovement{
     
     Controller controller;
     boolean useThresh = false;
-    Rotaion rotaion;
+	Rotaion rotaion;
+	boolean dshdsh = true; 
  
     private Encoder fL_Enc = new Encoder(PinConstants.FL_ENC_A, PinConstants.FL_ENC_B);
 	//TODO: Something else is trying to use DIO pins 2,3 and causing
@@ -264,7 +265,7 @@ public class SparkMovement{
 	 	this.setBackLeft(this.getBackLeft());	
  }
 
- 	public void update()
+ 	public void update(double x)
  {
 	rotaion.reset();
 		 
@@ -272,16 +273,16 @@ public class SparkMovement{
 	lateralInput = controller.getAxis("right");
 	rotaionInput = controller.getAxis("turnRight");
 
-	this.setFrontRight(this.getFrontRight());
-	this.setFrontLeft(this.getFrontLeft());
-	this.setBackRight(this.getBackRight());
-	this.setBackLeft(this.getBackLeft());		
+	this.setFrontRight(Math.pow(this.getFrontRight() * x, 3));
+	this.setFrontLeft(Math.pow(this.getFrontLeft() * x, 3));
+	this.setBackRight(Math.pow(this.getBackRight() * x, 3));
+	this.setBackLeft(Math.pow(this.getBackLeft() * x, 3));
+	
+	// this.setFrontRight(this.getFrontRight() * x);
+	// this.setFrontLeft(this.getFrontLeft() * x);
+	// this.setBackRight(this.getBackRight() * x);
+	// this.setBackLeft(this.getBackLeft() * x);		
  }
-
- 
-
-
-
 
 }
 

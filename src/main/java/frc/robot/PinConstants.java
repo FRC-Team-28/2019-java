@@ -13,17 +13,20 @@ public class PinConstants {
 		//TALONS
 		public static final int
 		    VAC_MOTOR = 0,
-		    HAB_MOTOR = 1,
-			LEFT_ARM_MOTOR = 2,
-			RIGHT_ARM_MOTOR = 3,
-			ELEVATOR_MOTOR = 4, 
-			HAB_VACUUM_MOTOR = 5,
-			WRIST_MOTOR = 6;
+			LEFT_ARM_MOTOR = 1,
+			RIGHT_ARM_MOTOR = 2,
+			ELEVATOR_MOTOR = 3, 
+			WRIST_MOTOR = 4,
+			HAB_MOTOR_1 = 5,
+		    HAB_MOTOR_2 = 6,
+		    HAB_MOTOR_3 = 7,
+		    HAB_MOTOR_4 = 8;
+
 
 
 		
 		//SPARK/PWM 
-		public static final int FL_MOTOR = 3, FR_MOTOR = 2, BR_MOTOR = 0, BL_MOTOR = 1;
+		public static final int FL_MOTOR = 3, FR_MOTOR = 2, BR_MOTOR = 0, BL_MOTOR = 1, HAB_VAC_MOTOR = 4;
 		
 	
 		//DIO

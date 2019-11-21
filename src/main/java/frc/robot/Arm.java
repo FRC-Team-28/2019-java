@@ -39,23 +39,27 @@ public class Arm {
 
 	public void setArm(double x)
 	{
-		motor1.set(ControlMode.PercentOutput, 0.75 * x);
-		motor2.set(ControlMode.PercentOutput, 0.75 * x);
+
+		if(controller2.getButton("stopArm"))
+		{
+			motor1.set(ControlMode.PercentOutput, 0);
+			motor2.set(ControlMode.PercentOutput, 0);
+		}
+		else
+		{
+			motor1.set(ControlMode.PercentOutput, (-0.25 * x) + 0.15 );
+			motor2.set(ControlMode.PercentOutput, (0.25 * x) - 0.15);
+		}
+
+		
 	}
 
 	
 	
 
 	public void update()
-	{
-		if(controller2.getButton("hold"))
-		{
-			this.setArm(-0.2);
-		}
-		else
-		{
-			this.setArm(this.getArm());
-		}
+	{	
+			this.setArm(Math.pow(this.getArm(), 3));
 	}
 	
 	

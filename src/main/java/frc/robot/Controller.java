@@ -36,6 +36,7 @@ public class Controller {
 		axisMap.put("turnRight", Controller1.getTriggerAxis(GenericHID.Hand.kRight) - (Controller1.getTriggerAxis(GenericHID.Hand.kLeft)));
 		buttonMap.put("Zucc", Controller1.getAButtonPressed());
 		buttonMap.put("partialZucc", Controller1.getBButtonPressed());
+		buttonMap.put("StopLiftMotor", Controller1.getYButtonPressed());
 		axisMap.put("arm", Controller2.getY(GenericHID.Hand.kLeft)); 
 		axisMap.put("elevator", Controller2.getY(GenericHID.Hand.kRight)); 
 		//buttonMap.put("chase", Controller1.getAButton());
@@ -51,6 +52,18 @@ public class Controller {
 		// buttonMap.put("increaseSmoothing", Controller2.getBumper(GenericHID.Hand.kRight));
 		// buttonMap.put("decreaseSmoothing", Controller2.getBumper(GenericHID.Hand.kLeft));
 		buttonMap.put("hold", Controller2.getAButton());
+
+		buttonMap.put("stopArm", Controller2.getBButton());
+
+
+		buttonMap.put("GigaZucc", Controller1.getXButton());
+
+		// buttonMap.put("LiftUp", Controller2.getBumper(GenericHID.Hand.kRight));
+		// buttonMap.put("LiftDown", Controller2.getBumper(GenericHID.Hand.kLeft));
+
+		axisMap.put("lift", Controller1.getY(GenericHID.Hand.kRight)); 
+
+		
 
 		
 
