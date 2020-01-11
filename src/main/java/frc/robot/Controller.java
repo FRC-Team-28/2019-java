@@ -15,13 +15,11 @@ public class Controller {
 	
 	public Controller()
 	{
-		
 		axisMap = new HashMap <>();
 		buttonMap = new HashMap<>();
 		Controller1 = new XboxController(0);
 		Controller2 = new XboxController(1);
-		update();
-		
+		update();	
 	}
 	
 	/* This method runs during teleop.
@@ -30,7 +28,6 @@ public class Controller {
 	 */
 	public void update()
 	{
-
 		axisMap.put("forward", Controller1.getY(GenericHID.Hand.kLeft)); 
 		axisMap.put("right", Controller1.getX(GenericHID.Hand.kLeft));
 		axisMap.put("turnRight", Controller1.getTriggerAxis(GenericHID.Hand.kRight) - (Controller1.getTriggerAxis(GenericHID.Hand.kLeft)));
@@ -55,19 +52,12 @@ public class Controller {
 
 		buttonMap.put("stopArm", Controller2.getBButton());
 
-
 		buttonMap.put("GigaZucc", Controller1.getXButton());
 
 		// buttonMap.put("LiftUp", Controller2.getBumper(GenericHID.Hand.kRight));
 		// buttonMap.put("LiftDown", Controller2.getBumper(GenericHID.Hand.kLeft));
 
 		axisMap.put("lift", Controller1.getY(GenericHID.Hand.kRight)); 
-
-		
-
-		
-
-
 
 	}
 	

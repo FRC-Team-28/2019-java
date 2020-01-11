@@ -45,6 +45,7 @@ public class Arm {
 			motor1.set(ControlMode.PercentOutput, 0);
 			motor2.set(ControlMode.PercentOutput, 0);
 		}
+		
 		else
 		{
 			motor1.set(ControlMode.PercentOutput, (-0.25 * x) + 0.15 );
@@ -53,9 +54,6 @@ public class Arm {
 
 		
 	}
-
-	
-	
 
 	public void update()
 	{	

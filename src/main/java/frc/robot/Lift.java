@@ -1,6 +1,5 @@
 package frc.robot;
 
-
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -8,35 +7,25 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
-
 public class Lift {
 
 	private Controller controller1;
     private Controller controller2;
-
-
-
 	private TalonSRX liftMotor1 = new TalonSRX(PinConstants.HAB_MOTOR_1); //right 1
 	private TalonSRX liftMotor2 = new TalonSRX(PinConstants.HAB_MOTOR_2); //right 2
 	private TalonSRX liftMotor3 = new TalonSRX(PinConstants.HAB_MOTOR_3); //left 1
 	private TalonSRX liftMotor4 = new TalonSRX(PinConstants.HAB_MOTOR_4); //left 2
-    
     private Spark vac = new Spark(PinConstants.HAB_VAC_MOTOR);
-
     private boolean succ = false;
     private boolean stopMotor = false;
 
-
-	
 	//TODO tune PID and set starting position
 	
 	public Lift(Controller newController1, Controller newController2)
 	{
         controller1 = newController1;
-
         controller2 = newController2;
 	}
-	
 	
     public double getLift()
     {
@@ -44,15 +33,12 @@ public class Lift {
     }
 
 	public void setLift(double x)
-	{
-       
+	{  
         liftMotor1.set(ControlMode.PercentOutput, x/2);
         liftMotor2.set(ControlMode.PercentOutput, x/2);
         liftMotor3.set(ControlMode.PercentOutput, x/2);
         liftMotor4.set(ControlMode.PercentOutput, x/2);
-        
-      
-      
+         
         // if(controller2.getButton("LiftUp"))
         // {
         //     liftMotor1.set(ControlMode.PercentOutput, x);
@@ -67,12 +53,7 @@ public class Lift {
         //     // liftMotor3.set(ControlMode.PercentOutput, -x);
         //     // liftMotor4.set(ControlMode.PercentOutput, -x);
         // }
-
-
 	}
-
-	
-	
 
 	public void update()
 	{
@@ -122,7 +103,5 @@ public class Lift {
         SmartDashboard.putBoolean("StopLift", stopMotor);
 
 	}
-	
-    
     
 }

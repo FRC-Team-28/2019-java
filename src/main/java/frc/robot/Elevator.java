@@ -9,23 +9,14 @@ import com.ctre.phoenix.motorcontrol.can.*;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 
-
-
-
-
 public class Elevator
-{
-        
+{  
     //This class makes it go like up or something 
     
     Controller controller;
-
-    private AnalogTrigger limit = new AnalogTrigger(PinConstants.ELEVATOR_SWITCH); 
-       
+    private AnalogTrigger limit = new AnalogTrigger(PinConstants.ELEVATOR_SWITCH);       
     private TalonSRX elevator = new TalonSRX(PinConstants.ELEVATOR_MOTOR);
-
     private int smoothing;
-
 
     public Elevator(Controller newController)
     {
@@ -74,10 +65,7 @@ public class Elevator
 
 		/* Zero the sensor */
 		elevator.setSelectedSensorPosition(0, PinConstants.PID_LOOP_IDX, PinConstants.TIMEOUT_MS);
-
-
     }
-
 
     public void update()
     {
@@ -109,19 +97,20 @@ public class Elevator
 			double targetPos = 4096 * 0.5;
 			elevator.set(ControlMode.MotionMagic, targetPos);
 			
-        } 
+        }
+
         else if(controller.getButton("hold"))
         {
             elevator.set(ControlMode.PercentOutput, 0.2);
         }
+
         else 
         {
 			/* Percent Output */
 			elevator.set(ControlMode.PercentOutput, leftYstick);
-        }
-        
-                                                         
+        }                                                 
     }   
+
     public double getElevator()
     {
         return controller.getAxis("elevator");
@@ -136,11 +125,11 @@ public class Elevator
     {
         elevator.getSensorCollection().setQuadraturePosition(0,0);
     }
-
-   public double getElevEncDist()
-   {
+    
+    public double getElevEncDist()
+    {
        return elevator.getSensorCollection().getQuadraturePosition();
-   }
+    }
    
     public double getElevEncRate()
     {
@@ -155,9 +144,4 @@ public class Elevator
         SmartDashboard.putNumber("D", PinConstants.Gains.kD);
         SmartDashboard.putNumber("Elevator Encoder Distance", this.getElevEncDist());
     }
-
-    
-
-
-    
 }

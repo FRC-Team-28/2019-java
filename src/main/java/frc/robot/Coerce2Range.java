@@ -26,7 +26,6 @@ public class Coerce2Range {
         /* Constrain to the output range */
             speed = Math.max(Math.min(result, outputMax), outputMin);
 
-
         return speed;
     }
 
